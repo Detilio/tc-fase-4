@@ -113,4 +113,4 @@ Para subir a aplicação para a nuvem:
 ---
 
 ## ✒️ Autor
-Desenvolvido para o Tech Challenge da Pós-Tech FIAP (Arquitetura Java).
+Rafael Detilio
