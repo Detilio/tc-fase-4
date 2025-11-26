@@ -21,8 +21,7 @@ public class NotificarAdministrador {
             Gson gson = new Gson();
             Feedback feedback = gson.fromJson(message, Feedback.class);
 
-            // Simula o envio de e-mail (Aqui entraria o SendGrid ou JavaMail)
-            // Requisito do projeto: Exibir os dados do e-mail [cite: 37-40]
+            // Simula o envio de e-mail 
             context.getLogger().info("========================================");
             context.getLogger().info("[SIMULAÇÃO DE EMAIL] Enviando alerta para admin@fiap.com.br");
             context.getLogger().info("Assunto: URGENTE - Feedback Negativo Recebido");

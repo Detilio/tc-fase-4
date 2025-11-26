@@ -39,7 +39,7 @@ public class RelatorioSemanal {
 
             CosmosContainer container = client.getDatabase("avaliacoes").getContainer("Avaliacoes");
 
-            // 3. Buscar os dados (Select * é ok para esse volume de dados do desafio)
+            // 3. Buscar os dados 
             String query = "SELECT * FROM c";
             CosmosPagedIterable<Feedback> feedbacks = container.queryItems(query, new CosmosQueryRequestOptions(), Feedback.class);
 

@@ -62,7 +62,6 @@ public class ProcessarFeedback {
             String cosmosEndpoint = System.getenv("COSMOS_DB_ENDPOINT");
             String cosmosKey = System.getenv("COSMOS_DB_KEY");
             
-            // Usando .endpoint() e .key() em vez de connectionString()
             CosmosClient cosmosClient = new CosmosClientBuilder()
                 .endpoint(cosmosEndpoint)
                 .key(cosmosKey)
