@@ -1,0 +1,16 @@
+# Arquivos de configuração local com SENHAS 
+local.settings.json
+
+# Pasta de build 
+target/
+bin/
+
+# Arquivos de IDE e configuração do usuário
+.vscode/
+.idea/
+*.classpath
+*.project
+*.settings/
+
+# Arquivos de log
+*.log
