@@ -6,22 +6,14 @@ O sistema foi arquitetado seguindo princípios **SOLID** e padrão **MVC**, gara
 
 ## 🚀 Arquitetura da Solução
 
-A solução utiliza o modelo **PaaS (Platform as a Service)** e **FaaS (Function as a Service)**.
+A solução utiliza o modelo **PaaS (Platform as a Service)** focada em **Serverless (FaaS)**.
 
 * **Azure Functions (Java 17):** Núcleo da aplicação.
 * **Azure Cosmos DB (NoSQL):** Armazenamento dos feedbacks.
 * **Azure Queue Storage:** Desacoplamento para processamento assíncrono de urgências.
 * **Application Insights:** Monitoramento e logs.
 
-### Estrutura do Código (MVC/SOLID)
-O projeto está organizado para facilitar a manutenção e testes:
-* `controller`: Contém as Azure Functions (Entry Points). Apenas recebem a requisição.
-* `service`: Contém as regras de negócio (validações, cálculos, lógica de alerta).
-* `repository`: Camada de abstração para o Cosmos DB e Queue Storage.
-* `model`: Representação dos dados (DTOs/Entidades).
-* `config`: Configurações de infraestrutura (Singleton).
-
-### Fluxo de Dados
+### Diagrama de Fluxo
 1.  **User** -> [POST /api/ProcessarFeedback] -> **Controller**
 2.  **Controller** -> **Service** (Valida Nota) -> **Repository** (Salva no Cosmos DB)
 3.  **Service** -> (Se Nota <= 4) -> **Repository** (Envia p/ Queue)
@@ -30,11 +22,34 @@ O projeto está organizado para facilitar a manutenção e testes:
 
 ---
 
+## 🏛️ Justificativa das Escolhas Tecnológicas
+
+A escolha da arquitetura e dos componentes foi baseada nos seguintes critérios:
+
+### 1. Modelo de Nuvem: PaaS e Serverless
+Optamos pelo modelo **PaaS (Platform as a Service)** em detrimento de IaaS ou SaaS, conforme análise:
+* **Por que não IaaS?** O IaaS exigiria o gerenciamento de Máquinas Virtuais (VMs), Sistema Operacional e atualizações de segurança. O foco do projeto é a **lógica de negócio**, não a administração de infraestrutura.
+* **Por que não SaaS?** Uma solução SaaS pronta não permitiria a personalização necessária para as regras de negócio específicas de cálculo de feedback e integração customizada exigidas no desafio.
+* **Vantagem do Serverless (Azure Functions):**
+    * **Escalabilidade Automática:** O Azure gerencia a alocação de recursos conforme a demanda de requisições.
+    * **Modelo de Custo (Pay-as-you-go):** No plano de consumo, pagamos apenas pelo tempo de execução e memória utilizada, ideal para cargas de trabalho variáveis.
+    * **Abstração:** Permite focar puramente no código Java.
+
+### 2. Banco de Dados: Azure Cosmos DB (NoSQL)
+* Escolhida a abordagem **NoSQL** devido à natureza flexível do objeto `Feedback`.
+* O Cosmos DB oferece integração nativa com Azure Functions (Bindings), baixíssima latência e capacidade de escalar globalmente se necessário.
+
+### 3. Mensageria: Azure Queue Storage
+* Utilizado para desacoplar o recebimento do feedback do envio de notificações.
+* Garante **resiliência**: Se o serviço de e-mail falhar, a mensagem persiste na fila para nova tentativa, garantindo que nenhum alerta crítico seja perdido.
+
+---
+
 ## 🛠️ Tecnologias Utilizadas
 
 * **Java 17**
 * **Maven** (Gerenciamento de dependências e Build)
-* **IntelliJ IDEA** (ou VS Code)
+* **IntelliJ IDEA**
 * **Azure Functions Core Tools**
 * **Gson** (Processamento JSON)
 * **Git & GitHub**
