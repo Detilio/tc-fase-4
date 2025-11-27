@@ -14,3 +14,8 @@ bin/
 
 # Arquivos de log
 *.log
+
+# Postman Collections
+tc-4-fase.postman_collection.json
+*.postman_collection.json
+*.postman_environment.json
