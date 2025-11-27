@@ -1,5 +1,6 @@
-package br.com.fiap;
+package br.com.fiap.controller;
 
+import br.com.fiap.model.Feedback;
 import com.microsoft.azure.functions.annotation.*;
 import com.microsoft.azure.functions.*;
 import com.google.gson.Gson;

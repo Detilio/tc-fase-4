@@ -1,4 +1,4 @@
-package br.com.fiap;
+package br.com.fiap.model;
 
 import java.util.UUID;
 
